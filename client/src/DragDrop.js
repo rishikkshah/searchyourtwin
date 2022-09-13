@@ -29,7 +29,7 @@ function DragDrop() {
   data.append("file", file);
 
   const handleSubmit = (e) => {
-    // console.log(URL.createObjectURL(file));
+    console.log(URL.createObjectURL(file));
     e.preventDefault();
     setLoading(true);
     fetch("/detectFace", {
@@ -37,7 +37,7 @@ function DragDrop() {
       body: data,
     })
       .then((res) => {
-        // console.log(res);
+        console.log(res);
         return res.json();
       })
       .then((data) => {
@@ -53,7 +53,7 @@ function DragDrop() {
         }
       })
       .catch((err) => {
-        console.log(err.message);
+        console.log(err);
         // setError(true);
         setLoading(false);
       });

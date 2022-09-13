@@ -30,14 +30,14 @@ app.get("*", (req, res) => {
 });
 
 app.post("/detectFace", (req, res) => {
-  const file = req.files.file.name;
+  // const file = req.files.file.name;
   const filePath = req.files.file.tempFilePath;
   // console.log(file);
-  // console.log(filePath);
+  console.log(filePath);
   var process = spawn("python", ["./index.py", filePath]);
   let searchData = [];
   process.stdout.on("data", function (data) {
-    // console.log(data);
+    console.log(data);
     // if (Number(data) === 0) res.send([]);
     searchData = studentData.filter((item) => item.roll === Number(data));
     // console.log(searchData);
