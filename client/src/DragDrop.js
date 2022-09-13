@@ -136,9 +136,9 @@ function DragDrop() {
               type="submit"
               variant="contained"
               style={{ marginTop: "20px" }}
-              onClick={handleClear}
+              disabled={loading}
             >
-              Clear
+              {loading ? "Loading..." : "Search"}
             </Button>
           </div>
           <div
@@ -202,13 +202,14 @@ function DragDrop() {
                 <img src={cross} alt="cross" style={{ width: "50px" }} />
               </div>
             </div>
+
             <Button
               type="submit"
               variant="contained"
               style={{ marginTop: "20px" }}
-              disabled={loading}
+              onClick={handleClear}
             >
-              {loading ? "Loading..." : "Search"}
+              Clear
             </Button>
           </div>
         </div>

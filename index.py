@@ -2,11 +2,22 @@ import face_recognition
 import pickle
 import cv2
 import os
+import numpy as np
+import urllib
 import sys
 
 
-def recognize_face(image):
-        
+def recognize_face(img):
+    # print("recognization started")
+    image = cv2.imread(img)
+    # print(image.shape)
+    # print(image)
+    # print(not hasattr(image, 'shape'))
+    if(not hasattr(image, 'shape')):
+        url_response = urllib.request.urlopen(img)
+        image = np.array(bytearray(url_response.read()))
+        image = cv2.imdecode(image, -1)
+
     # store image in cloudinary
     #find path of xml file containing haarcascade file
     cascPathface = os.path.dirname(
@@ -16,7 +27,6 @@ def recognize_face(image):
     # load the known faces and embeddings saved in last file
     data = pickle.loads(open('face_enc', "rb").read())
     #Find path to the image you want to detect face and pass it here
-    image = cv2.imread(image)
     rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
     #convert image to Greyscale for haarcascade
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
